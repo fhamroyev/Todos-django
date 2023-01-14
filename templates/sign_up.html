@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+{% block content %}
+<div class="is-flex is-justify-content-center is-align-items-center" style="height: 500px;">
+    <form method="post" autocomplete="off">
+        {% csrf_token %}
+        <div class="is-flex is-flex-direction-column is-align-items-center">
+            <div style="box-shadow: 0 0 10px black; border-radius: 10px;"
+                class="p-6 is-flex is-flex-direction-column is-justify-content-space-around is-align-items-center sign_up">
+                {% for field in form %}
+                <label class="label">{{field.label}}</label>
+                {{field}}
+                {% endfor %}
+                <br>
+                <button class="button is-outlined is-danger">Submit</button>
+                <div>
+                    Don't have an account?
+                    <span>
+                        <a href="{% url 'sign_in' %}">Sign in here</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+{% endblock %}

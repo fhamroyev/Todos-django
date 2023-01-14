@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+{% block content %}
+<section style="height: 600px;" class="is-flex is-align-items-center is-justify-content-center">
+    <div style="width: 530px; height: 400px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 25px; border-radius: 8px;"
+        class="p-4 todo_list">
+        <form method="post" autocomplete="off">
+            {% csrf_token %}
+            {% for field in form %}
+            {{field}}
+            {% endfor %}
+            <button class="button">Submit</button>
+        </form>
+        <br>
+        <div style="overflow: auto !important; height: 320px;" class="todos">
+            {% for todo in todos %}
+            <div class="is-flex is-align-items-center p-3" style="border: 1px solid rgba(238, 238, 238);">
+                <h1 class="subtitle m-0 has-text-black">{{todo.title}}</h1>
+                <a href="{% url 'todo' %}?todo={{todo.pk}}">
+                    <img src="{{todo.delete_icon.url}}" alt="" width="25px">
+                </a>`
+                <a href="{% url 'edit_todo' todo.pk %}">
+                    <img src="{{todo.edit_icon.url}}" alt="" width="25px">
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
